@@ -3,12 +3,11 @@ import { Box, Typography, styled } from "@mui/material";
 import { CircledCrossIcon } from "../Home2";
 import { useTranslation } from "react-i18next";
 
-const ModalContainer = styled(Box)(({ theme }) => ({
+const ModalContainer = styled(Box)({
   position: "absolute",
   width: "100%",
-  height: "auto",
-  top: "50%",
-  transform: 'translateY(-50%)',
+  height: "100vh",
+  top: "auto",
   left: 0,
   right: 0,
   bottom: 0,
@@ -17,12 +16,8 @@ const ModalContainer = styled(Box)(({ theme }) => ({
   alignItems: "center",
   justifyContent: "center",
   backgroundColor: "rgba(0,0,0,0.3)",
-  [theme.breakpoints.down("sm")]: {
-    padding: '0 1rem'
-  },
- 
-}));
-const InnerContainer = styled(Box)(({ theme }) => ({
+});
+const InnerContainer = styled(Box)({
   width: "57%",
   height: "auto",
   maxHeight: "900px",
@@ -32,12 +27,7 @@ const InnerContainer = styled(Box)(({ theme }) => ({
   padding: "1rem 2rem",
   backgroundColor: "#ffffff",
   display: "inline-block",
-  [theme.breakpoints.down("sm")]: {
-    width: '100%',
-    padding: '1rem'
-  },
-
-}));
+});
 const ModelContent = styled(Box)({
   display: "grid",
   gap: "0.8rem",
@@ -92,7 +82,7 @@ export default function GiftImagePreviewModal({
   const { t } = useTranslation();
   return (
     <ModalContainer>
-      <InnerContainer  >
+      <InnerContainer>
         <CircledCrossIcon sx={CloseIconStyles} onClick={() => close(false)} />
         <ModelContent>
           <ImageContent>
@@ -108,14 +98,11 @@ export default function GiftImagePreviewModal({
             <img
               src={data?.url}
               alt="icon"
-              sx={{
+              style={{
                 width: "500px",
                 height: "500px",
                 objectFit: "cover",
                 borderRadius: "1.5rem",
-                '@media (max-width: 767px)': {
-                  height: 'auto'
-                },
               }}
             />
           </ImageContent>

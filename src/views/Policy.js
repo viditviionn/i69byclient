@@ -8,11 +8,19 @@ const I69appDataDeletionInstructions = dynamic(() => import('./i69app-data-delet
 const Policy = () => {
   const { t } = useTranslation();
 
-  const [showDataDeletionSteps,setShowDataDeletionSteps] = useState(false)
+  const [showDataDeletionSteps, setShowDataDeletionSteps] = useState(false)
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 }} style={{ padding: 20, backgroundColor: "#1c1f2d" }}>
+      <Box sx={{}} style={{ padding: 0, backgroundColor: "#1c1f2d" }}>
+        <a
+          href="https://i69app.com/policy"
+          target="_blank"
+          onclick="autoOpenAlink('https://i69app.com/policy')"
+          style={{ marginLeft: "20px", color: 'white', textDecoration: 'underline' }}
+        >
+          https://i69app.com/policy
+        </a>
         <h2 style={{ marginLeft: "20px", color: 'white' }}>{t("Policy.policy")}</h2>
 
         <Box sx={{ flexGrow: 1 }} style={{ margin: 20 }}>
@@ -129,22 +137,59 @@ const Policy = () => {
               <h6>{t("Policy.otherDisclosures")}</h6>
               <p>{t("Policy.permitted")}</p>
               <p>{t("Policy.businessStructure")}</p>
-              <hr style={{background: 'white'}}/>
+              <hr style={{ background: 'white' }} />
+              <a
+                href={`${window.location.origin}/i69app-data-deletion/i69app-data-deletion-instructions`}
+                target="_blank"
+                onclick={`autoOpenAlink(${window.location.origin}/i69app-data-deletion/i69app-data-deletion-instructions)`}
+                style={{ color: 'white', textDecoration: 'underline' }}>{`${window.location.origin}/i69app-data-deletion/i69app-data-deletion-instructions`}
+              </a>
+              <h2 style={{ color: 'white' }}>
+                {t("I69APP-DATA-DELETION.i69appDataDeletionInstructionURL")}
+              </h2>
+              {/* <p>{t("Policy.linkurl")}</p> */}
+              {/* <I69appDataDeletionInstructions /> */}
+              <Grid container spacing={1} direction="row">
+                <Grid item xs={12} sm={9} style={{ color: 'white' }}>
+                  <p style={{ marginBottom: "15px" }}>
+                    {t("I69APP-DATA-DELETION.i69appDataDeletionDescription")}
+                  </p>
+
+                  <h6>
+                    {" "}
+                    1.
+                    {t("I69APP-DATA-DELETION.i69appStepOne")}
+                  </h6>
+
+                  <h6>
+                    2.
+                    {t("I69APP-DATA-DELETION.i69appStepTwo")}
+                  </h6>
+
+                  <h6> 3.{t("I69APP-DATA-DELETION.i69appStepThree")}</h6>
+
+                  <h6>
+                    {" "}
+                    4.
+                    {t("I69APP-DATA-DELETION.i69appStepFour")}
+                  </h6>
+                </Grid>
+              </Grid>
               <Link
                 component="button"
                 variant="body2"
-                              onClick={() => {
-                                  var url = `${window.location.origin}/i69app-data-deletion/i69app-data-deletion-instructions`;
-                                  window.open(url, "_blank");
-                              }
+                onClick={() => {
+                  var url = `${window.location.origin}/i69app-data-deletion/i69app-data-deletion-instructions`;
+                  window.open(url, "_blank");
+                }
                 }
                 legacyBehavior
               >
                 {t("Policy.i69appDataDeletionInstructionURL")}
               </Link> <span onClick={() => {
                 navigator.clipboard.writeText(`${window.location.origin}/i69app-data-deletion/i69app-data-deletion-instructions`)
-              }}><ContentCopyOutlined color="info" fontSize="12" style={{cursor:'pointer'}} /></span>
-              {showDataDeletionSteps  && <I69appDataDeletionInstructions />}
+              }}><ContentCopyOutlined color="info" fontSize="12" style={{ cursor: 'pointer' }} /></span>
+              {showDataDeletionSteps && <I69appDataDeletionInstructions />}
             </Grid>
             <Grid className="download-btn" item xs={12} sm={2}>
               <Button

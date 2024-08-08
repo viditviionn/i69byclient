@@ -194,7 +194,7 @@ const BuyChatCoin = () => {
               CardBoxData?.map((obj) => (
                 // <BuyCoinCardBox {...item} coinData={coinData} />
                 <div
-                  className="col-lg-4 col-sm-12 col-12 buy-coins-column"
+                  className="col-lg-4 col-12 buy-coins-column"
                   key={obj.name}
                 >
                   <div className="transparent-black-background buy-coins-card">

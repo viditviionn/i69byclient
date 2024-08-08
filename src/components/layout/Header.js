@@ -206,206 +206,208 @@ const Header = (props) => {
             bottomdivider ? "has-bottom-divider" : ""
           )}
         >
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <div className="site-header-logo">
-              <Logo />
-            </div>
-            <div>
-              {!hideNav && (
-                <>
-                  <button
-                    ref={hamburger}
-                    className="header-nav-toggle"
-                    onClick={isActive ? closeMenu : openMenu}
-                  >
-                    <span className="screen-reader">{t("Home.Menu")}</span>
-                    <span className="hamburger">
-                      <span className="hamburger-inner"></span>
-                    </span>
-                  </button>
-                  <nav
-                    ref={nav}
-                    className={classNames(
-                      "header-nav",
-                      isActive && "is-active"
-                    )}
-                    style={{ maxWidth: "100vw" }}
-                  >
-                    <div className="header-nav-inner">
-                      <div className="header-nav-scroll">
-                        <ul
-                          id="menuListWrapper"
-                          className={classNames(
-                            "list-reset text-xs",
-                            navposition && `header-nav-${navposition}`
-                          )}
-                          style={{ marginLeft: "0px" }}
-                        >
-                          <li style={{ marginTop: "20px" }}>
-                            <p className="header-bold-txt" onClick={closeMenu}>
-                              <Link
-                                style={{ color: "white" }}
-                                href="/contactUs"
-                                legacyBehavior
-                              >
-                                <div style={{ color: "white" }}>
-                                  {t("Home.ContactUs")}
-                                </div>
-                              </Link>
-                            </p>
-                          </li>
-                          <li style={{ marginTop: "20px" }}>
-                            <p className="header-bold-txt" onClick={closeMenu}>
-                              <Link href="/faq" legacyBehavior>
-                                <div style={{ color: "white" }}>
-                                  {t("Home.FAQ")}
-                                </div>
-                              </Link>
-                            </p>
-                          </li>
-                          <li style={{ marginTop: "20px" }}>
-                            <p className="header-bold-txt" onClick={closeMenu}>
-                              <Link href="/policy" legacyBehavior>
-                                <div style={{ color: "white" }}>
-                                  {t("Home.Policy")}
-                                </div>
-                              </Link>
-                            </p>
-                          </li>
-                          <li style={{ marginTop: "20px" }}>
-                            <p className="header-bold-txt" onClick={closeMenu}>
-                              <Link href="/terms" legacyBehavior>
-                                <div style={{ color: "white" }}>
-                                  {t("Home.Terms")}
-                                </div>
-                              </Link>
-                            </p>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </nav>
-                </>
-              )}
-            </div>
+          <div className="site-header-logo">
+            <Logo />
           </div>
-          <div style={{display: 'flex', alignItems:'center'}}>
-            <Box
-              sx={{
-                minWidth: 120,
-              }}
-            >
-              <FormControl
-                fullWidth
-                classes={{ root: "langBg", MuiInput: "123123" }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                  }}
+          <div>
+            {!hideNav && (
+              <>
+                <button
+                  ref={hamburger}
+                  className="header-nav-toggle"
+                  onClick={isActive ? closeMenu : openMenu}
                 >
-                  <div>
-                    <Image2
-                      className={`language-logo`}
-                      src={"../images/language.svg"}
-                      alt="Language"
-                      style={{
-                        height: "32px",
-                        width: "32px",
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <Select
-                      labelId="languageSelect"
-                      id="languageSelect"
-                      value={language}
-                      label="Language"
-                      onChange={handleChange}
-                      placeholder="Language"
-                      classes={{
-                        root: "input-select",
-                        MuiInput: "112313",
-                      }}
-                      style={{ padding: "0" }}
-                      MenuProps={{
-                        className: "menu-outbox",
-                        MenuListProps: {
-                          className: "213212313",
-                          disablePadding: true,
-                        },
-                      }}
-                    >
-                      <MenuItem disabled selected value="Language">
-                        <em>Language</em>
-                      </MenuItem>
-                      {LanguageArray &&
-                        LanguageArray?.sort((a, b) =>
-                          a?.label.localeCompare(b?.label)
-                        )?.map((i, index) => (
-                          <MenuItem key={index} value={i.label}>
-                            <I69Link
-                              className="dropDownMenuWrapper"
-                              locale={i.value}
-                              href=""
+                  <span className="screen-reader">{t("Home.Menu")}</span>
+                  <span className="hamburger">
+                    <span className="hamburger-inner"></span>
+                  </span>
+                </button>
+                <nav
+                  ref={nav}
+                  className={classNames("header-nav", isActive && "is-active")}
+                >
+                  <div className="header-nav-inner">
+                    <div className="header-nav-scroll">
+                      <ul
+                        id="menuListWrapper"
+                        className={classNames(
+                          "list-reset text-xs",
+                          navposition && `header-nav-${navposition}`
+                        )}
+                        style={{ marginLeft: "0px" }}
+                      >
+                        <li>
+                          <Box
+                            sx={{
+                              minWidth: 120,
+                            }}
+                          >
+                            <FormControl
+                              fullWidth
+                              classes={{ root: "langBg", MuiInput: "123123" }}
                             >
-                              <img
-                                loading="lazy"
-                                src={i.image.src}
-                                width={20}
-                                height={20}
-                                alt="flag"
-                              />
-                              <span className="imageFlage">{i.label}</span>
-                            </I69Link>
-                          </MenuItem>
-                        ))}
-                    </Select>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <div>
+                                  <Image2
+                                    src={"/images/language.svg"}
+                                    alt="Language"
+                                    style={{
+                                      height: "32px",
+                                      width: "32px",
+                                    }}
+                                  />
+                                </div>
+                                <div>
+                                  <Select
+                                    labelId="languageSelect"
+                                    id="languageSelect"
+                                    value={language}
+                                    label={t("edit_profile.language")}
+                                    onChange={(e) =>
+                                      handleChange(e.target.value)
+                                    }
+                                    placeholder={t("edit_profile.language")}
+                                    classes={{
+                                      root: "input-select",
+                                      MuiInput: "112313",
+                                    }}
+                                    style={{ padding: "0" }}
+                                    MenuProps={{
+                                      className: "menu-outbox",
+                                      MenuListProps: {
+                                        className: "213212313",
+                                        disablePadding: true,
+                                      },
+                                    }}
+                                  >
+                                    <MenuItem
+                                      disabled
+                                      selected
+                                      value="Language"
+                                    >
+                                      <em>Language</em>
+                                    </MenuItem>
+                                    {LanguageArray &&
+                                      LanguageArray?.sort((a, b) =>
+                                        a?.label.localeCompare(b?.label)
+                                      )?.map((i, index) => (
+                                        <MenuItem key={index} value={i.label}>
+                                          <I69Link
+                                            className="dropDownMenuWrapper"
+                                            locale={i.value}
+                                            href=""
+                                          >
+                                            <img
+                                              loading="lazy"
+                                              src={i.image.src}
+                                              width={20}
+                                              height={20}
+                                              alt="flag"
+                                            />
+                                            <span className="imageFlage">
+                                              {i.label}
+                                            </span>
+                                          </I69Link>
+                                        </MenuItem>
+                                      ))}
+                                  </Select>
+                                </div>
+                              </div>
+                            </FormControl>
+                          </Box>
+                        </li>
+
+                        <li style={{ marginTop: "20px" }}>
+                          <p className="header-bold-txt" onClick={closeMenu}>
+                            <Link
+                              style={{ color: "white" }}
+                              href="/contactUs"
+                              legacyBehavior
+                            >
+                              <div style={{ color: "white" }}>
+                                {t("Home.ContactUs")}
+                              </div>
+                            </Link>
+                          </p>
+                        </li>
+                        <li style={{ marginTop: "20px" }}>
+                          <p className="header-bold-txt" onClick={closeMenu}>
+                            <Link href="/faq" legacyBehavior>
+                              <div style={{ color: "white" }}>
+                                {t("Home.FAQ")}
+                              </div>
+                            </Link>
+                          </p>
+                        </li>
+                        <li style={{ marginTop: "20px" }}>
+                          <p className="header-bold-txt" onClick={closeMenu}>
+                            <Link href="/policy" legacyBehavior>
+                              <div style={{ color: "white" }}>
+                                {t("Home.Policy")}
+                              </div>
+                            </Link>
+                          </p>
+                        </li>
+                        <li style={{ marginTop: "20px" }}>
+                          <p className="header-bold-txt" onClick={closeMenu}>
+                            <Link href="/terms" legacyBehavior>
+                              <div style={{ color: "white" }}>
+                                {t("Home.Terms")}
+                              </div>
+                            </Link>
+                          </p>
+                        </li>
+                        <li className="nav-item py-lg-0 py-3">
+                          <Link href="/signin" legacyBehavior>
+                            {/* <button style={{ background: '#E2C76E', width: '100px', color: 'black', fontSize: '18px', fontWeight: '600', borderRadius: '5px' }}>{t("Home.Login")}</button> */}
+                            {/* <Box sx={{ border: '3px solid #ffffff', borderRadius: '400px', width: 'fit-content' }} > */}
+                            <Box
+                              sx={{
+                                border: "1px solid #ffffff",
+                                borderRadius: "400px",
+                                width: "fit-content",
+                              }}
+                            >
+                              {/* <div className="login-header-btn-border-bg" /> */}
+                              <button
+                                style={{
+                                  backgroundColor: "#AEA597",
+                                  borderColor: "#AEA597",
+                                  border: "2px solid #212529",
+                                  borderRadius: "400px",
+                                  width: "112px",
+                                  height: "36px",
+                                  position: "relative",
+                                  fontSize: "14px",
+                                  fontWeight: 600,
+                                }}
+                                disabled={isDisableLoginButton}
+                              >
+                                <img
+                                  src={`/images/vector2.svg`}
+                                  alt=""
+                                  style={{
+                                    position: "absolute",
+                                    top: 0,
+                                    width: "100%",
+                                  }}
+                                />
+                                <span>{t("Home.Login")}</span>
+                              </button>
+                            </Box>
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                </div>
-              </FormControl>
-            </Box>
-            <span className="nav-item py-lg-0 py-3">
-              <Link href="/signin" legacyBehavior>
-                {/* <button style={{ background: '#E2C76E', width: '100px', color: 'black', fontSize: '18px', fontWeight: '600', borderRadius: '5px' }}>{t("Home.Login")}</button> */}
-                {/* <Box sx={{ border: '3px solid #ffffff', borderRadius: '400px', width: 'fit-content' }} > */}
-                <Box
-                  sx={{
-                    border: "1px solid #ffffff",
-                    borderRadius: "400px",
-                    width: "fit-content",
-                  }}
-                >
-                  {/* <div className="login-header-btn-border-bg" /> */}
-                  <button
-                    style={{
-                      backgroundColor: "#AEA597",
-                      borderColor: "#AEA597",
-                      border: "2px solid #212529",
-                      borderRadius: "400px",
-                      width: "112px",
-                      height: "36px",
-                      position: "relative",
-                      fontSize: "14px",
-                      fontWeight: 600,
-                    }}
-                    disabled={isDisableLoginButton}
-                  >
-                    <img
-                      src={`/images/vector2.svg`}
-                      alt=""
-                      style={{
-                        position: "absolute",
-                        top: 0,
-                        width: "100%",
-                      }}
-                    />
-                    <span>{t("Home.Login")}</span>
-                  </button>
-                </Box>
-              </Link>
-            </span>
+                </nav>
+              </>
+            )}
           </div>
         </div>
       </div>

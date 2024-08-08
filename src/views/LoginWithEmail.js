@@ -43,25 +43,25 @@ const logoWrapperStyleForMobile = {
   margin: 0,
 };
 
-// const loginWrapperContainerDesktop = {
-//   backgroundImage: `url(/images/hero5bg.png)`,
-//   backgroundRepeat: "no-repeat",
-//   backgroundSize: "100% 101%",
-//   backgroundAttachment: "fixed",
-//   minHeight: "100vh",
-//   display: "flex",
-//   justifyContent: "center",
-//   alignItems: "center",
-// };
+const loginWrapperContainerDesktop = {
+  backgroundImage: `url(/images/hero5bg.png)`,
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "100% 101%",
+  backgroundAttachment: "fixed",
+  minHeight: "100vh",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+};
 
-// const loginWrapperContainerMobile = {
-//   backgroundImage: `url(/images/hero5bg.png)`,
-//   backgroundRepeat: "no-repeat",
-//   backgroundSize: "cover",
-//   backgroundAttachment: "fixed",
-//   minHeight: "100vh",
-//   display: "block",
-// };
+const loginWrapperContainerMobile = {
+  backgroundImage: `url(/images/hero5bg.png)`,
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "100% 101%",
+  backgroundAttachment: "fixed",
+  minHeight: "100vh",
+  display: "block",
+};
 
 const LoginButton = ({
   title,
@@ -367,25 +367,19 @@ const LoginWithEmail = () => {
           <Header />
         </div>
         <div
-          className="login-main"
-          style={{
-            // isMobileVersion
-            //   ? loginWrapperContainerMobile
-            //   : loginWrapperContainerDesktop
-            backgroundImage: `url('/images/hero5bg.png')`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-          }}
+          style={
+            isMobileVersion
+              ? loginWrapperContainerMobile
+              : loginWrapperContainerDesktop
+          }
         >
-          <Box className="wrapperBox">
+          <Box sx={{ p: isMobileVersion ? 0 : 2 }}>
             <Box
-              className="login-wrapper"
               sx={
                 isMobileVersion
-                  ? { ...logoWrapperStyleForMobile }
-                  : { ...logoWrapperStyleForDesktop }
+                  ? logoWrapperStyleForMobile
+                  : logoWrapperStyleForDesktop
               }
-              style={{ maxHeight: "90px !important" }}
             >
               {isMobileVersion ? (
                 <>
@@ -434,56 +428,54 @@ const LoginWithEmail = () => {
               <div className="or-seperator">
                 <i>OR</i>
               </div>
-              <div className="login-button-wrapper">
-                {userSignupMethodList &&
-                  userSignupMethodList.length > 0 &&
-                  userSignupMethodList
-                    .filter((x) => x.is_allowed)
-                    .map((item) => {
-                      if (item?.login_method === "Google") {
-                        return (
-                          <>
-                            <LoginButton
-                              Icon={GoogleIcon}
-                              title={t("Login.loginGoogle")}
-                              bgColor="#D54831"
-                              sx={{ position: "relative" }}
-                              onClick={handleCustomButtonClick}
-                            />
-                            <div
-                              ref={googleButtonContainerRef}
-                              style={{ display: "none" }}
-                            >
-                              <GoogleLogin
-                                onSuccess={handleSuccess}
-                                onError={handleError}
-                              />
-                            </div>
-                          </>
-                        );
-                      } else if (item?.login_method === "Facebook") {
-                        return (
-                          <FacebookLogin
-                            appId={config.facebookAppId}
-                            autoLoad={false}
-                            callback={responseFacebook}
-                            cssClass="my-facebook-button-class"
-                            fields="name,email,picture"
-                            render={(renderProps) => (
-                              <LoginButton
-                                Icon={FacebookRoundedIcon}
-                                title={t("Login.loginFacebook")}
-                                bgColor="#243488"
-                                onClick={renderProps.onClick}
-                              />
-                            )}
+              {userSignupMethodList &&
+                userSignupMethodList.length > 0 &&
+                userSignupMethodList
+                  .filter((x) => x.is_allowed)
+                  .map((item) => {
+                    if (item?.login_method === "Google") {
+                      return (
+                        <>
+                          <LoginButton
+                            Icon={GoogleIcon}
+                            title={t("Login.loginGoogle")}
+                            bgColor="#D54831"
+                            sx={{ position: "relative" }}
+                            onClick={handleCustomButtonClick}
                           />
-                        );
-                      } else {
-                        // other cases
-                      }
-                    })}
-              </div>
+                          <div
+                            ref={googleButtonContainerRef}
+                            style={{ display: "none" }}
+                          >
+                            <GoogleLogin
+                              onSuccess={handleSuccess}
+                              onError={handleError}
+                            />
+                          </div>
+                        </>
+                      );
+                    } else if (item?.login_method === "Facebook") {
+                      return (
+                        <FacebookLogin
+                          appId={config.facebookAppId}
+                          autoLoad={false}
+                          callback={responseFacebook}
+                          cssClass="my-facebook-button-class"
+                          fields="name,email,picture"
+                          render={(renderProps) => (
+                            <LoginButton
+                              Icon={FacebookRoundedIcon}
+                              title={t("Login.loginFacebook")}
+                              bgColor="#243488"
+                              onClick={renderProps.onClick}
+                            />
+                          )}
+                        />
+                      );
+                    } else {
+                      // other cases
+                    }
+                  })}
             </Box>
           </Box>
         </div>

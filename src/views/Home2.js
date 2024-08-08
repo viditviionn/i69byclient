@@ -86,7 +86,6 @@ export const CircledCrossIcon = styled(ClearIcon)({
 const Home2 = () => {
   const [currentScreen, setCurrentScreen] = useState("home");
   const [userId, setUserId] = useState();
-  const [isOpen, setIsOpen] = useState(false);
 
   const router = useRouter();
   const [getUserData, { data, error, loading }] = useLazyQuery(USER_QUERY);
@@ -121,7 +120,6 @@ const Home2 = () => {
     <>
       <div className="my-profile-wrapper fixed-position">
         <Navbar
-          className={"navbar-common"}
           customTab={{
             name: "shareMoment",
             active: currentScreen === "shareMoment",
@@ -130,17 +128,10 @@ const Home2 = () => {
           userStoryMomentList={userStoryMomentList?.storyMomentList}
         />
         {/* ================== Header ================ */}
-        <Box className="header-control header-gold interests-header">
-          <Navbar
-          showIconOnly
-            className="navbar-icon"
-            customTab={{
-              name: "shareMoment",
-              active: currentScreen === "shareMoment",
-              callback: ActivateShareMomentScreen,
-            }}
-            userStoryMomentList={userStoryMomentList?.storyMomentList}
-          />
+        <Box
+          className="header-control header-gold interests-header"
+          sx={{ justifyContent: "space-between" }}
+        >
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             {currentScreen === "home" ? (
               <i
@@ -155,11 +146,11 @@ const Home2 = () => {
                 aria-hidden="true"
               ></i>
             )}
-            {/* {currentScreen !== "shareMoment" && (
+            {currentScreen !== "shareMoment" && (
               <div>
                 <Avatar src={data?.user?.avatarPhotos[0]?.url} alt="avatar" />
               </div>
-            )} */}
+            )}
             <Typography
               sx={{
                 color: "#070707",
@@ -173,10 +164,7 @@ const Home2 = () => {
                 : "Share a moment"}
             </Typography>
           </Box>
-          <Box
-            sx={{ display: "flex", alignItems: "center", gap: 2 }}
-            className="nav-icons"
-          >
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <NotificationIcon />
             <div className="profile_avtar">
               <img

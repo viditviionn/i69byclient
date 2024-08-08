@@ -401,7 +401,7 @@ const Search = () => {
                 </ul>
               </div>
               <div
-                className="tab-content user-search-area"
+                className="tab-content user-search-area p-2"
                 ref={backgroundContainerRef}
               >
                 {currentTab === "random" && (

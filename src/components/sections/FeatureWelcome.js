@@ -216,8 +216,7 @@ const FeatureWelcome = ({
         style={{
           backgroundImage: `url(/images/welcomeBack.png)`,
           backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition:'30%',
+          backgroundSize: "100% 100%",
           // backgroundAttachment: 'fixed'
         }}
       >
@@ -225,7 +224,7 @@ const FeatureWelcome = ({
           style={{
             backgroundImage: `url(/images/weelcomebackShadow.png)`,
             backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
+            backgroundSize: "100% 100%",
             // backgroundAttachment: 'fixed'
           }}
         >
@@ -244,8 +243,8 @@ const FeatureWelcome = ({
                   </Typography>
                 </div>
                 <div className="app-store-google-badge">
-                  {/* <div className="app-store-inner"> */}
-                    {/* <Button
+                  <div className="app-store-inner">
+                    <Button
                       size="large"
                       type="submit"
                       variant="outlined"
@@ -280,9 +279,12 @@ const FeatureWelcome = ({
                         </span>
 
                         <span className="m-0 googlePlayBtn">App Store</span>
+                        {/* <Typography variant="span" className="m-0 googlePlayBtn play-txt" >
+                
+              </Typography> */}
                       </div>
-                    </Button> */}
-                  {/* </div> */}
+                    </Button>
+                  </div>
                   <Button
                     size="large"
                     type="submit"

@@ -53,9 +53,6 @@ const Navbar = ({
   customTab,
   setOpenSubscriptionModal,
   userStoryMomentList,
-  menuIcon,
-  className,
-  showIconOnly = false,
 }) => {
   const router = useRouter();
   const { t } = useTranslation();
@@ -123,7 +120,7 @@ const Navbar = ({
 
   useEffect(() => {
     getRoomData();
-  }, [typeof loading]);
+  }, []);
 
   useEffect(() => {
     // Retrieve userId from localStorage on component mount
@@ -290,7 +287,7 @@ const Navbar = ({
 
   return (
     <>
-      {showIconOnly && (
+      <nav className="sidebar navbar navbar-expand-md navbar-dark bg-dark fixed-left">
         <button
           className="navbar-toggler"
           type="button"
@@ -300,20 +297,11 @@ const Navbar = ({
           aria-controls="offcanvasDarkNavbar"
           aria-label="Toggle navigation"
         >
-          {menuIcon ? (
-            <Img src={menuIcon} height={45} width={45} />
-          ) : (
-            <span className="navbar-toggler-icon">
-              <i className="fas fa-bars"></i>
-            </span>
-          )}
+          <span className="navbar-toggler-icon">
+            <i className="fas fa-bars"></i>
+          </span>
         </button>
-      )}
-      <nav
-        className={`sidebar navbar navbar-expand-md navbar-dark bg-dark ${
-          isOpen ? "mobile-left" : "fixed-left"
-        } ${className}`}
-      >
+
         <div
           className={`collapse navbar-collapse d-lg-flex justify-content-md-end ${
             isOpen ? "show" : "not-show"

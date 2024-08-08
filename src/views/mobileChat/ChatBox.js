@@ -93,7 +93,7 @@ export const ChatBox = ({
   const handleMessageChange = (event) => {
     setMessageValue(event.target.value);
   };
-console.log(realGiftData , virtualGiftData, locale , "???")
+
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       setMessage(messageValue);

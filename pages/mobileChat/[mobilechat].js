@@ -1,10 +1,7 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React from 'react';
 import nextI18nextConfig from '../../next-i18next.config';
-import dynamic from 'next/dynamic';
-const MobileChat = dynamic(() => import('../../src/views/MobileChat'),{
-  ssr: false
-})
+import MobileChat from '../../src/views/MobileChat';
 
 
 export async function getServerSideProps({locale}){

@@ -116,7 +116,13 @@ const AllMessages = () => {
               selectedUser === item?.node?.id ? "user-list2" : "user-list"
             }`}
           >
-           
+            {item?.node?.messageSet?.edges?.length > 0 ? (
+              <small>
+                {formatDate(item?.node?.messageSet?.edges[0]?.node?.timestamp)}
+              </small>
+            ) : (
+              <small>{t("message_screen.start")}</small>
+            )}
 
             <img
               src={item?.node?.target?.avatarPhotos[0]?.url}
@@ -127,21 +133,9 @@ const AllMessages = () => {
             <div className="chat-list-text">
               <div>
                 <strong>{item?.node?.target?.fullName}</strong>
-            
-                <span> {item?.node?.messageSet?.edges[0]?.node?.content.substring(0,25) + `${item?.node?.messageSet?.edges[0]?.node?.content.length>15 &&"..."}`} </span>
+                <span>{item?.node?.messageSet?.edges[0]?.node?.content}</span>
               </div>
-              <div>
-
-
-              {item?.node?.messageSet?.edges?.length > 0 ? (
-              <small >
-                {formatDate(item?.node?.messageSet?.edges[0]?.node?.timestamp)}
-              </small>
-            ) : (
-              <small>{t("message_screen.start")}</small>
-            )}
               <i className="fa fa-angle-right"></i>
-              </div>
             </div>
           </div>
         ))}
@@ -316,8 +310,7 @@ export const AllMessagesForWeb = ({
                           : item?.node?.userId?.fullName}
                       </strong>
                       <span>
-                        
-                      <span>{item?.node?.messageSet?.edges[0]?.node?.content}</span>
+                        {item?.node?.messageSet?.edges[0]?.node?.content}
                       </span>
                     </div>
                     {item?.node?.unread !== "0" ? (

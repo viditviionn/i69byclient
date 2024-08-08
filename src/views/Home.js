@@ -12,7 +12,6 @@ import { sendGift } from "../mutation/sendGift";
 import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 import { Block } from "@material-ui/icons";
 import { useTranslation } from "react-i18next";
-import { KeyboardArrowLeft, Search } from "@mui/icons-material";
 
 const USER_QUERY = gql`
   query user($id: String!) {
@@ -73,7 +72,7 @@ const GET_COIN_CATEGORY = gql`
   }
 `;
 
-export const ChatVideoPlayer = ({ src, setVideoUrlState, setVideoUrl }) => {
+const ChatVideoPlayer = ({ src, setVideoUrlState, setVideoUrl }) => {
   const videoRef = useRef(null);
   const [autoplay, setAutoplay] = useState(false);
 
@@ -108,10 +107,10 @@ export const ChatVideoPlayer = ({ src, setVideoUrlState, setVideoUrl }) => {
   };
 
   return (
-    <div className="d-flex align-items-end justify-content-end gap-1 videoWrapper">
+    <div className="d-flex align-items-end justify-content-end gap-1">
       <video
-        width="100%"
-        height="100%"
+        width="320"
+        height="320"
         ref={videoRef}
         controls={false}
         muted={true}
@@ -377,7 +376,7 @@ const Home = () => {
     const categories = coinsCategory?.coinsCategory;
     const matchedCoin = categories?.find(
       (c) => coins >= c.minCoins && coins <= c.maxCoins
-    )?.name;  
+    )?.name;
     return coins === 0 ? "silver" : matchedCoin?.toLowerCase();
   };
 
@@ -507,7 +506,7 @@ const Home = () => {
                         src="/images/logo-right.jpg"
                         alt="logo"
                       />
-                    </figure> :  roomsAllData?.target?.fullName ? 
+                    </figure> :  roomsAllData?.target?.fullName ?
                   (
                     <Avatar
                       sizes="small"
@@ -528,7 +527,7 @@ const Home = () => {
                         )
                       }
                     />
-                  ) : 
+                  ) :
                   (
                     <figure>
                       <img
@@ -858,19 +857,9 @@ const Home = () => {
           <div className="row m-0">
             <div className="col-12 user-list-parent px-0">
               <div className="chat-headers msg-header msg-header-res">
-                <div className="chat-headers-wrapper">
-                  <KeyboardArrowLeft />
-                  <Navbar
-                    menuIcon={"/images/i69-logo-green-bg.png"}
-                    showIconOnly
-                    className="navbar-icon"
-                  />
-                </div>
-                <div className="chat-headers-text">MESSAGES</div>
-                <Search />
+                MESSAGES
               </div>
               <div className="scr-msg">
-                <div className="scr-msg-overlay"></div>
                 <AllMessages />
               </div>
             </div>

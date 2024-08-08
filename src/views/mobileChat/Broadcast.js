@@ -33,8 +33,8 @@ const Broadcast = ({ setSelectedUser, setTime }) => {
   let broadcastData = data?.broadcastMsgs?.edges;
 
   const fetchId = (node) => {
-    // setSelectedUser(node?.id);
-    // setTime(node?.timestamp);
+    setSelectedUser(node?.id);
+    setTime(node?.timestamp);
   };
 
   return (

@@ -160,7 +160,7 @@ function Hero(props) {
 
   return (
     <>
-      <div style={{ position: "fixed", width: "100%", zIndex: "1000", maxWidth:'100vw' }}>
+      <div style={{ position: "fixed", width: "100%", zIndex: "1000" }}>
         <Header
           latValue={latitude}
           longValue={longitude}
@@ -168,12 +168,11 @@ function Hero(props) {
         />
       </div>
       <div
-      className="hero-main"
         style={{
           backgroundImage: `url(/images/hero5bg.png)`,
           backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          // backgroundAttachment: "fixed",
+          backgroundSize: "100% 100%",
+          backgroundAttachment: "fixed",
         }}
       >
         <div className="container">

@@ -381,7 +381,10 @@ const EditProfile2 = ({ isCallingRegistration }) => {
     }
     if (
       selectedFile &&
-      (selectedFile.type === "image/jpeg" || selectedFile.type === "image/png")
+      (selectedFile.type === "image/jpeg" ||
+        selectedFile.type === "image/png" ||
+        selectedFile.type === "video/mp4" ||
+        selectedFile.type === "video/webm")
     ) {
       const reader = new FileReader();
 
@@ -868,23 +871,29 @@ const EditProfile2 = ({ isCallingRegistration }) => {
                               .map((item, index) => (
                                 <div className="slider-item-wrap">
                                   <div className="slider-item" key={index}>
-                                    <img
-                                      className="slider-item-image"
-                                      src={item?.url}
-                                      alt=""
-                                    />
+                                    {videoExtensions.test(item?.url) ? (
+                                      <video className="slider-item-image">
+                                        <source src={item?.url} />
+                                      </video>
+                                    ) : (
+                                      <img
+                                        className="slider-item-image"
+                                        src={item?.url}
+                                        alt=""
+                                      />
+                                    )}
                                     <a
                                       href="#"
                                       className="close_icon"
                                       onClick={() =>
-                                        deleteAvatarPhoto(item?.id, false)
+                                        deleteAvatarPhoto(item?.id, true)
                                       }
                                     >
-                                      <img src="images/close_ic.svg" alt="" />
+                                      <img
+                                        src="images/close_ic.svg"
+                                        alt=""
+                                      />
                                     </a>
-                                    <div className="slider-hover-img">
-                                      <img src="images/album_ic.svg" alt="" />
-                                    </div>
                                   </div>
                                 </div>
                               ))}

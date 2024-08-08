@@ -187,14 +187,14 @@ const MomentsTab = ({ userData, screenType }) => {
       <div
         className={
           showMomentImageState
-            ? "gift_image_preview_modal show "
+            ? "gift_image_preview_modal show align-items-center justify-content-center"
             : "gift_image_preview_modal"
         }
-        // style={{
-        //   width: "70%",
-        //   top: "31vh",
-        //   left: "10%",
-        // }}
+        style={{
+          width: "70%",
+          top: "31vh",
+          left: "10%",
+        }}
       >
         <div className="d-flex align-items-center">
           <img
@@ -300,12 +300,12 @@ const MomentsTab = ({ userData, screenType }) => {
             ? "full_gift_image_preview_modal show align-items-center justify-content-center"
             : "full_gift_image_preview_modal"
         }
-        // style={{
-        //   width: "calc(100vw - 245px)",
-        //   top: "65px",
-        //   left: "240px",
-        //   zIndex: "999",
-        // }}
+        style={{
+          width: "calc(100vw - 245px)",
+          top: "65px",
+          left: "240px",
+          zIndex: "999",
+        }}
       >
         <div className="d-flex align-items-center">
           <img

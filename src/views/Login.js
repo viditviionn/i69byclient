@@ -10,6 +10,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import { useTranslation } from "react-i18next";
 import config from "../config";
+import Link from "next/link";
 import { useMediaQuery } from "react-responsive";
 import axiosConfig from "../common/axiosConfig";
 // import { useGeolocated } from "react-geolocated";
@@ -36,31 +37,31 @@ const USER_SIGNUP_REGION = gql`
   }
 `;
 
-// const logoWrapperStyleForDesktop = {
-//   backgroundImage: `url(/images/loginBackground1.png)`,
-//   backgroundRepeat: "no-repeat",
-//   backgroundSize: "cover",
-//   objectFit: "cover",
-//   minWidth: "700px",
-//   display: "flex",
-//   alignItems: "center",
-//   flexDirection: "column",
-//   borderRadius: "20px",
-//   marginTop: "30px",
-// };
+const logoWrapperStyleForDesktop = {
+  backgroundImage: `url(/images/loginBackground1.png)`,
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "cover",
+  objectFit: "cover",
+  minWidth: "700px",
+  display: "flex",
+  alignItems: "center",
+  flexDirection: "column",
+  borderRadius: "20px",
+  marginTop: "30px",
+};
 
-// const logoWrapperStyleForMobile = {
-//   backgroundImage: `url(/images/loginBackgroundForMobile.png)`,
-//   backgroundRepeat: "no-repeat",
-//   backgroundSize: "cover",
-//   objectFit: "cover",
-//   height: "100vh",
-//   display: "flex",
-//   justifyContent: "center",
-//   alignItems: "center",
-//   flexDirection: "column",
-//   margin: 0,
-// };
+const logoWrapperStyleForMobile = {
+  backgroundImage: `url(/images/loginBackgroundForMobile.png)`,
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "cover",
+  objectFit: "cover",
+  height: "100vh",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  flexDirection: "column",
+  margin: 0,
+};
 
 const LoginButton = ({
   title,
@@ -416,28 +417,29 @@ const Login = () => {
     <FullScreenLoader />
   ) : (
     <>
-        <div className="login-header" style={{ position: "fixed", width: "100%", zIndex: "1000" }}>
+      <main>
+        <div style={{ position: "fixed", width: "100%", zIndex: "1000" }}>
           <Header />
         </div>
-        <div className="login-main"
+        <div
           style={{
-            backgroundImage: `url('/images/hero5bg.png')`,
+            backgroundImage: `url(/images/hero5bg.png)`,
             backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-            // backgroundAttachment: "fixed",
-            // minHeight: "100vh",
-            // display: "flex",
-            // justifyContent: "center",
-            // alignItems: "center",
+            backgroundSize: "100% 101%",
+            backgroundAttachment: "fixed",
+            minHeight: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          <Box className="wrapperBox" sx={{ p: isMobileVersion ? 0 : 2 }}>
-            <Box className="login-wrapper"
-              // sx={
-              //   isMobileVersion
-              //     ? logoWrapperStyleForMobile
-              //     : logoWrapperStyleForDesktop
-              // }
+          <Box sx={{ p: isMobileVersion ? 0 : 2 }}>
+            <Box
+              sx={
+                isMobileVersion
+                  ? logoWrapperStyleForMobile
+                  : logoWrapperStyleForDesktop
+              }
             >
               {isMobileVersion ? (
                 <>
@@ -455,18 +457,19 @@ const Login = () => {
                   style={{ height: "210px", marginTop: "50px" }}
                 />
               )}
-              <Box className="login-button-wrapper"  sx={isMobileVersion ? { mb: 1, height: "50%" } : { mt: 2 }}>
+              <Box sx={isMobileVersion ? { mb: 1, height: "50%" } : { mt: 2 }}>
                 {getSignUpButton()}
               </Box>
               <p className="login-footer-text">
-                  {t("Login.footerCopyright")}
-                  <a href="/terms">{t("Terms.termsAndConditions")}</a>
-                  {t("Home.and")}
-                  <a href="/policy">{t("Policy.privacyPolicy")}</a>
+                {t("Login.footerCopyright")}
+                                  <Link href="/terms">{t("Terms.termsAndConditions")}</Link>
+                {t("Home.and")}
+                                  <Link href="/policy">{t("Policy.privacyPolicy")}</Link>
               </p>
             </Box>
           </Box>
         </div>
+      </main>
       {isShownSignInErrorModal && (
         <SignInFailedModal
           handleActionButton={handleSignInErrorButton}

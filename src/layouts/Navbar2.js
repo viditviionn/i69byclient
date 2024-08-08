@@ -45,8 +45,8 @@ const Navbar2 = () => {
                 <li className="nav-item py-lg-0 py-3">
                     <a href="/terms">Terms</a>
                 </li>
-               
-         
+
+
             </ul>
         </div>
     </nav>

@@ -6,7 +6,7 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import { AvatarWrapper, Avatar, CircledCrossIcon } from "../Home2";
+import { AvatarWrapper, Avatar, CircledCrossIcon, VideoAvatar } from "../Home2";
 import Carousel from "react-material-ui-carousel";
 import AddStoryTooltip from "./AddStoryTooltip";
 import { useEffect, useState, useRef, useCallback } from "react";
@@ -545,7 +545,8 @@ const AddStory = ({
       onChangeHandler={onChangeHandler}
     >
       <div
-        className={`story-container add-story ${isAllowedToPublish ? "cursor-pointer" : ""
+        className={`story-container add-story ${
+          isAllowedToPublish ? "cursor-pointer" : ""
           }`}
         onClick={() => {
           if (!isAllowedToPublish) return;
@@ -557,7 +558,8 @@ const AddStory = ({
             <img
               src="/images/noto_camera.png"
               alt=""
-              className={`add-story-icon ${!isAllowedToPublish ? "opacity-25 cursor-default" : ""
+              className={`add-story-icon ${
+                !isAllowedToPublish ? "opacity-25 cursor-default" : ""
                 }`}
               height={58}
               width={58}
@@ -705,7 +707,7 @@ const StoryVideoPlayer = ({ src }) => {
   return (
     <video
       className="storyvideoprod"
-      // loop
+      loop
       autoPlay={autoplay}
       controlsList="nodownload"
     >
@@ -719,24 +721,24 @@ const Story = ({ data, index, stories, onLikeStory, onCommentStory }) => {
   const [showModel, setShowModel] = useState(false);
   const [selectedStory, setSelectedStory] = useState(null);
   const [selectedID, setSelectedID] = useState();
-  const [imgClass, setimgClass] = useState("shimmer");
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const [imgClass, setimgClass] = useState("shimmer");
   let selected = "";
+  // let currentIndex = 0;
   let progress = 10;
 
   useEffect(() => {
     if (selectedID !== undefined) {
       setSelectedStory(stories?.[selectedID]);
     }
-  }, [selectedID, currentIndex]);
+  }, [selectedID]);
 
   const showStoryDetailView = (data, index) => {
     setSelectedID(index);
     selected = "" + index;
     setSelectedStory(data);
     setShowModel(true);
-    setCurrentIndex(0);
   };
 
   const hideStoryDetailView = () => {
@@ -758,9 +760,11 @@ const Story = ({ data, index, stories, onLikeStory, onCommentStory }) => {
           chatbox.style.width = newval + "%";
         } else {
           if (totalBars.length - 1 > currentIndex) {
+            // currentIndex = currentIndex + 1;
             setCurrentIndex(currentIndex + 1)
           } else {
             if (totalBars.length - 1 == currentIndex) {
+              // currentIndex = 0;
               setCurrentIndex(0)
               setShowModel(false);
             }
@@ -774,55 +778,17 @@ const Story = ({ data, index, stories, onLikeStory, onCommentStory }) => {
   };
 
 
-  // const handleNextStory = () => {
-  //   let id = "progressbar_" + selectedID + "_" + currentIndex + "_data";
-  //     let chatbox = document.querySelector("#" + id);
-  //   chatbox.style.width = 0
-  //   if (currentIndex < selectedStory?.stories?.edges.length - 1) {
-  //     setCurrentIndex(currentIndex + 1);
-  //   } else {
-  //     if(selectedID < stories?.length - 1) {
-  //       setSelectedID((prev) => Number(prev) + 1)
-  //       setCurrentIndex(0);
-  //     } else {
-  //       setShowModel(false);
-  //     }
-  //   }
-  // };
-
-  // const handlePreviousStory = () => {
-  //   let id = "progressbar_" + selectedID + "_" + currentIndex + "_data";
-  //     let chatbox = document.querySelector("#" + id);
-  //   chatbox.style.width = 0
-  //   if (currentIndex > 0) {
-  //     setCurrentIndex(currentIndex - 1);
-  //   } else {
-  //     if(selectedID !== 0) {
-  //       setSelectedID((prev) => Number(prev) - 1)
-  //       setCurrentIndex(0);
-  //     } else {
-  //       setShowModel(false);
-  //     }
-  //   }
-  // };
-
   const handleNextStory = () => {
     let id = "progressbar_" + selectedID + "_" + currentIndex + "_data";
-    let chatbox = document.querySelector("#" + id);
-    if (chatbox) {
-      chatbox.style.width = 0;
-    } else {
-      console.error("Chatbox not found for id:", id);
-    }
-
+      let chatbox = document.querySelector("#" + id);
+    chatbox.style.width = 0
     if (currentIndex < selectedStory?.stories?.edges.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
-      if (selectedID < stories?.length - 1) {
+      if(selectedID < stories?.length - 1) {
+        setSelectedID((prev) => Number(prev) + 1)
         setCurrentIndex(0);
-        setSelectedID(selectedID + 1);
       } else {
-        setCurrentIndex(0);
         setShowModel(false);
       }
     }
@@ -830,25 +796,19 @@ const Story = ({ data, index, stories, onLikeStory, onCommentStory }) => {
 
   const handlePreviousStory = () => {
     let id = "progressbar_" + selectedID + "_" + currentIndex + "_data";
-    let chatbox = document.querySelector("#" + id);
-    if (chatbox) {
-      chatbox.style.width = 0;
-    } else {
-      console.error("Chatbox not found for id:", id);
-    }
+      let chatbox = document.querySelector("#" + id);
+    chatbox.style.width = 0
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
     } else {
-      if (selectedID !== 0) {
+      if(selectedID !== 0) {
+        setSelectedID((prev) => Number(prev) - 1)
         setCurrentIndex(0);
-        setSelectedID(selectedID - 1);
       } else {
-        setCurrentIndex(0);
         setShowModel(false);
       }
     }
   };
-
 
 
   useEffect(() => {
@@ -869,11 +829,17 @@ const Story = ({ data, index, stories, onLikeStory, onCommentStory }) => {
           onClick={(e) => showStoryDetailView(data, index)}
         >
           <AvatarWrapper sx={{ position: "absolute" }}>
+            {/* {!videoExtensions.test(data?.user?.avatar?.url) ? ( */}
             <Avatar
               src={data?.user?.avatar?.url}
               alt=""
               style={{ width: "45px", height: "45px" }}
             />
+            {/* ) : ( */}
+            {/* <VideoAvatar>
+                <source src={data?.user?.avatar?.url} />
+              </VideoAvatar> */}
+            {/* )} */}
           </AvatarWrapper>
           {/* {data?.stories?.edges?.map((story, sindex) => (
             <StoryImage src={story?.node?.file} alt="" key={sindex} />
@@ -994,36 +960,49 @@ const Story = ({ data, index, stories, onLikeStory, onCommentStory }) => {
             </a>
           </div>
           <div className="story_mid">
-            <div
-              style={{
-                position: "absolute",
-                top: "50%",
-                left: "33%",
-                cursor: "pointer",
-                zIndex: 3,
-              }}
-              onClick={handlePreviousStory}
-            >
-              <KeyboardArrowLeft
-                fontSize="large"
-                sx={{ color: "white", height: "36px" }}
-              />
-            </div>
-            <div
-              style={{
-                position: "absolute",
-                top: "50%",
-                right: "33%",
-                cursor: "pointer",
-                zIndex: 3,
-              }}
-              onClick={handleNextStory}
-            >
-              <KeyboardArrowRight
-                fontSize="large"
-                sx={{ color: "white", height: "36px" }}
-              />
-            </div>
+            {/* {Number(selectedID) !== 0 && ( */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "33%",
+                  cursor: "pointer",
+                  zIndex: 3,
+                }}
+                onClick={() => {
+                  // setSelectedID((prev) => Number(prev) - 1);
+                  // setCurrentIndex(currentIndex - 1)
+                  handlePreviousStory()
+                }}
+              >
+                <KeyboardArrowLeft
+                  fontSize="large"
+                  sx={{ color: "white", height: "36px" }}
+                />
+              </div>
+            {/* )} */}
+            {/* {selectedID !== stories?.length - 1 && ( */}
+            {/* {selectedID < stories?.length - 1 && ( */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  right: "33%",
+                  cursor: "pointer",
+                  zIndex: 3,
+                }}
+                onClick={() => {
+                  // setSelectedID((prev) => Number(prev) + 1);
+                  // setCurrentIndex(currentIndex + 1)
+                  handleNextStory()
+                }}
+              >
+                <KeyboardArrowRight
+                  fontSize="large"
+                  sx={{ color: "white", height: "36px" }}
+                />
+              </div>
+            {/* )} */}
             <Carousel
               controls={false}
               indicators={false}
@@ -1085,11 +1064,11 @@ const ShareStoryOptions = ({
 }) => {
   const sharingOptionsStyles = show
     ? {
-      position: "absolute",
-      background: "#000000d1",
-      inset: 0,
-      borderRadius: "20px",
-    }
+        position: "absolute",
+        background: "#000000d1",
+        inset: 0,
+        borderRadius: "20px",
+      }
     : {};
 
   const ToggleButtonA = () => setSelected(1);
@@ -1184,12 +1163,12 @@ export const AllMomentsList = ({
     router.push(`/profile/${id}`);
   };
 
-  console.log(momentData, "Mommmmmeenennttssss");
 
   return (
     <Box
+      className="momentslist"
       sx={{
-        height: `calc(100vh - ${window.innerHeight > 900 ? "336px" : "260px"})`,
+        height: `calc(100vh)`,
         overflowY: "auto",
         ...sx,
       }}
@@ -1289,11 +1268,22 @@ export const AllMomentsList = ({
                 <Box sx={{ display: "flex", gap: 1.5, mb: 1 }}>
                   <AvatarWrapper sx={{ margin: 0 }}>
                     {/* <Avatar src="/images/model24.png" alt="" sx={{ height: 45, width: 45, maxHeight: 45, maxWidth: 45 }} /> */}
-                    <Avatar
+                    {/* <Avatar
                       src={item?.node?.user?.avatar?.url}
                       alt="avatar"
                       onClick={() => renderID(item?.node?.user?.id)}
-                    />
+                    /> */}
+                    {/* {!videoExtensions.test(item?.node?.user?.avatar?.url) ? ( */}
+                      <Avatar
+                        src={item?.node?.user?.avatar?.url}
+                        alt=""
+                        style={{ width: "45px", height: "45px" }}
+                      />
+                    {/* ) : ( */}
+                      {/* <VideoAvatar autoPlay>
+                        <source src={item?.node?.user?.avatar?.url} />
+                      </VideoAvatar> */}
+                    {/* )} */}
                   </AvatarWrapper>
                   <Typography className="moment-heading">
                     <span
@@ -1838,7 +1828,7 @@ const HomeScreen = ({ setCurrentScreen, userData, userStoryMomentList }) => {
         onLikeMoment={handleLikeMoment}
         onViewLikes={handleViewLikes}
         onViewComments={handleViewComments}
-      // onCommentMoment={handleCommentMoment}
+        // onCommentMoment={handleCommentMoment}
       />
 
       {(selectedImage || showMomentImage) && (
@@ -1852,7 +1842,7 @@ const HomeScreen = ({ setCurrentScreen, userData, userStoryMomentList }) => {
           />
           <Box sx={{ height: "96vh", position: "relative" }}>
             {selectedImage?.includes("image") ||
-              (showMomentImage && !videoExtensions.test(showMomentImage)) ? (
+            (showMomentImage && !videoExtensions.test(showMomentImage)) ? (
               <img
                 src={selectedImage || showMomentImage}
                 alt="selectedImage"

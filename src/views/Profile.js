@@ -606,7 +606,7 @@ const Profile = () => {
                     </span>
                   </button>
                 </div>
-              
+
               </div> */}
               {isClient && (
                 <ProfileCarousel

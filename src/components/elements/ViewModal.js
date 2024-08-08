@@ -5,14 +5,14 @@ const ViewModal = ({ children, onClose, open }) => {
     <div
       className={
         open
-          ? "gift_image_preview_modal show"
+          ? "gift_image_preview_modal show align-items-center justify-content-center"
           : "gift_image_preview_modal"
       }
-      // style={{
-      //   width: "70%",
-      //   top: "31vh",
-      //   left: "10%",
-      // }}
+      style={{
+        width: "70%",
+        top: "31vh",
+        left: "10%",
+      }}
     >
       <div className="d-flex align-items-center">
         <Link

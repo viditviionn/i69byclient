@@ -1,6 +1,6 @@
 import { gql, useLazyQuery } from "@apollo/client";
 import { Box, CircularProgress, Typography } from "@mui/material";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../layouts/Navbar";
 import Checkbox from "@mui/material/Checkbox";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
@@ -67,11 +67,6 @@ const InterestedInSection = ({ interestsPickerHandler }) => {
   const [gender, setGender] = useState(1);
   const [relationValue, setRelationValue] = useState("");
 
-  const isSmallScreen = useMemo(
-    () => Boolean(window?.innerWidth < 600),
-    [window?.innerWidth]
-  );
-
   const [
     getUserInterestsData,
     { data: userInterestsData, loading: userInterestsLoading },
@@ -111,7 +106,7 @@ const InterestedInSection = ({ interestsPickerHandler }) => {
             sx={{
               display: "grid",
               width: "100%",
-              gap: isSmallScreen ? 1 : 3,
+              gap: 3,
             }}
           >
             <Typography
@@ -139,11 +134,9 @@ const InterestedInSection = ({ interestsPickerHandler }) => {
                   >
                     <img
                       src={`/images/${item.iconName}.svg`}
-                      width={isSmallScreen ? 30 : item.iconSize}
+                      width={item.iconSize}
                     />
-                    <span
-                      style={{ fontSize: isSmallScreen ? "22px" : "inherit" }}
-                    >
+                    <span>
                       {t(`edit_profile.${item?.title?.toLowerCase()}`)}
                     </span>
                     {gender === item.value && (
@@ -162,11 +155,12 @@ const InterestedInSection = ({ interestsPickerHandler }) => {
         componentsProps={{
           tooltip: {
             sx: {
+              px: 6,
+              py: 3,
               borderRadius: 2.5,
               backgroundColor: "#185765",
-              ...(isSmallScreen
-                ? {}
-                : { px: 6, py: 3, width: "100%", minWidth: "500px" }),
+              width: "100%",
+              minWidth: "500px",
             },
           },
           arrow: {
@@ -179,7 +173,7 @@ const InterestedInSection = ({ interestsPickerHandler }) => {
         disableFocusListener
         disableHoverListener
         disableTouchListener
-        placement={isSmallScreen ? "bottom-end" : "right-start"}
+        placement="right-start"
         arrow
       >
         {children}
@@ -223,10 +217,7 @@ const InterestedInSection = ({ interestsPickerHandler }) => {
         }}
       >
         {userInterestsData?.userInterests?.map((item) => (
-          <GenderPickerTooltip
-            key={`gender-picker-${item.categoryName}`}
-            interestsItem={item.categoryName}
-          >
+          <GenderPickerTooltip interestsItem={item.categoryName}>
             <Box
               onClick={() => relationPickHandler(item.categoryName)}
               className="relation-picker"
@@ -237,13 +228,7 @@ const InterestedInSection = ({ interestsPickerHandler }) => {
                 width="60px"
               />
               <Typography
-                sx={{
-                  color: "#FFD778",
-                  fontSize: "30px",
-                  fontWeight: 700,
-                  paddingLeft: "4px",
-                  flex: 1,
-                }}
+                sx={{ color: "#FFD778", fontSize: "30px", fontWeight: 700 }}
               >
                 {item?.strName}
               </Typography>
